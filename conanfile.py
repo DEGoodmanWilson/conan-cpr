@@ -19,6 +19,7 @@ class CprConan(ConanFile):
     #use static org/channel for libs in conan-center
     #use version ranges for dependencies unless there's a reason not to
     requires = "libcurl/7.56.1@bincrafters/stable"
+    generators = "cmake"
 
     def requirements(self):
         if self.options.use_ssl:
