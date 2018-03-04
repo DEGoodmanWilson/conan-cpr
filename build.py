@@ -23,7 +23,7 @@ def get_version_from_recipe():
 
 
 def get_default_vars():
-    username = os.getenv("CONAN_USERNAME", "bincrafters")
+    username = os.getenv("CONAN_USERNAME", "DEGoodmanWilson")
     channel = os.getenv("CONAN_CHANNEL", "testing")
     version = get_version_from_recipe()
     return username, channel, version
@@ -57,7 +57,7 @@ if __name__ == "__main__":
     name = get_name_from_recipe()
     username, channel, version = get_env_vars()
     reference = "{0}/{1}".format(name, version)
-    upload = "https://api.bintray.com/conan/{0}/public-conan".format(username)
+    upload = "https://api.bintray.com/conan/{0}/opensource".format(username)
     bincrafters = "https://api.bintray.com/conan/bincrafters/public-conan"
 
     builder = ConanMultiPackager(
@@ -67,6 +67,7 @@ if __name__ == "__main__":
         upload=upload,
         remotes=[upload, bincrafters],
         upload_only_when_stable=True,
+        docker_entry_script='sudo apt-get -qq update && sudo apt-get -qq install -y pkg-config',
         stable_branch_pattern="stable/*")
 
     builder.add_common_builds(shared_option_name=name + ":shared")
