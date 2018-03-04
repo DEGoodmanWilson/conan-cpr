@@ -49,7 +49,7 @@ class CprConan(ConanFile):
     def package(self):
         with tools.chdir("sources"):
             self.copy(pattern="LICENSE")
-            self.copy(pattern="*", dst="include/cpr", src="sources/include", keep_path=True)
+            self.copy(pattern="*", dst="include", src="sources/include", keep_path=True)
             self.copy(pattern="*.dll", dst="bin", src="bin", keep_path=False)
             self.copy(pattern="*.lib", dst="lib", src="lib", keep_path=False)
             self.copy(pattern="*.a", dst="lib", src="lib", keep_path=False)
