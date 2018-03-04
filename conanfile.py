@@ -5,7 +5,7 @@ from conans import ConanFile, CMake, tools
 import os
 
 
-class LibcprConan(ConanFile):
+class CprConan(ConanFile):
     name = "cpr"
     version = "1.3.0"
     url = "https://github.com/DEGoodmanWilson/conan-cpr"
@@ -18,7 +18,7 @@ class LibcprConan(ConanFile):
     default_options = "shared=False", "libcurl:with_ldap=False", "use_ssl=True"
     #use static org/channel for libs in conan-center
     #use version ranges for dependencies unless there's a reason not to
-    requires = "libcurl/7.56.1@bincrafters/stable"
+    requires = "libcurl/7.50.3@lasote/stable"
 
     def requirements(self):
         if self.options.use_ssl:
