@@ -58,3 +58,5 @@ class CprConan(ConanFile):
 
     def package_info(self):
         self.cpp_info.libs = tools.collect_libs(self)
+        if tools.os_info.is_macos:
+            self.cpp_info.libs.append("curl")
