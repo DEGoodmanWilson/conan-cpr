@@ -42,7 +42,7 @@ class CprConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions["USE_SYSTEM_CURL"] = True # Force CPR to not try to build curl itself from a git submodule
         cmake.definitions["BUILD_CPR_TESTS"] = False
-        cmake.configure(source_dir="sources")
+        cmake.configure()
         cmake.build()
 
     def package(self):
