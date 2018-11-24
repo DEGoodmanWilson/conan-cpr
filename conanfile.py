@@ -27,7 +27,7 @@ class CprConan(ConanFile):
         self.requires("libcurl/7.56.1@bincrafters/stable")
 
     def configure(self):
-        if self.settings.compiler == "Visual Studio" and self.settings.compiler.version <= "12":
+        if self.settings.compiler == "Visual Studio" and self.settings.compiler.version <= 12:
             raise ConanInvalidConfiguration("Visual Studio <= 12 is not supported (current "
                                             "is '{}')".format(self.settings.compiler.version))
 
