@@ -28,7 +28,8 @@ class CprConan(ConanFile):
 
     def configure(self):
         if self.settings.compiler == "Visual Studio" and self.settings.compiler.version <= "12":
-            raise ConanInvalidConfiguration("Visual Studio <= 12 is not supported")
+            raise ConanInvalidConfiguration("Visual Studio <= 12 is not supported (current "
+                                            "is '{}')".format(self.settings.compiler.version))
 
         self.options["libcurl"].with_openssl = bool(self.options.use_ssl)
 
