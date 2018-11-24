@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from conans import ConanFile, CMake, tools
+from conans.errors import ConanInvalidConfiguration
 import os
 
 
@@ -26,6 +27,9 @@ class CprConan(ConanFile):
         self.requires("libcurl/7.56.1@bincrafters/stable")
 
     def configure(self):
+        if self.settings.compiler == "Visual Studio" and self.settings.compiler.version <= "12":
+            raise ConanInvalidConfiguration("Visual Studio <= 12 is not supported")
+
         self.options["libcurl"].with_openssl = bool(self.options.use_ssl)
 
     def source(self):
