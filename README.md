@@ -1,10 +1,10 @@
-[ ![Download](https://api.bintray.com/packages/DEGoodmanWilson/opensource/cpr%3ADEGoodmanWilson/images/download.svg) ](https://bintray.com/DEGoodmanWilson/opensource/cpr%3ADEGoodmanWilson/_latestVersion)
+[ ![Download](https://api.bintray.com/packages/degoodmanwilson/opensource/cpr%3ADEGoodmanWilson/images/download.svg) ](https://bintray.com/degoodmanwilson/opensource/cpr%3ADEGoodmanWilson/_latestVersion)
 [![Build Status](https://travis-ci.org/DEGoodmanWilson/conan-cpr.svg?branch=stable%2F1.3.0)](https://travis-ci.org/DEGoodmanWilson/conan-cpr)
 [![Build status](https://ci.appveyor.com/api/projects/status/sxs9n6vb8nqa92l5?svg=true)](https://ci.appveyor.com/project/DEGoodmanWilson/conan-cpr)
 
-[Conan.io](https://conan.io) package for [cpr](https://github.com/someauthor/cpr) project
+[Conan.io](https://conan.io) package for [cpr](https://github.com/whoshuu/cpr) project
 
-The packages generated with this **conanfile** can be found in [Bintray](https://bintray.com/DEGoodmanWilson/opensource/cpr%3ADEGoodmanWilson).
+The packages generated with this **conanfile** can be found in [Bintray](https://bintray.com/degoodmanwilson/opensource/cpr%3ADEGoodmanWilson).
 
 ## For Users: Use this package
 
@@ -44,7 +44,7 @@ The following command both runs all the steps of the conan file, and publishes t
 
 ## Add Remote
 
-    $ conan remote add DEGoodmanWilson "https://api.bintray.com/conan/DEGoodmanWilson/opensource"
+    $ conan remote add DEGoodmanWilson "https://api.bintray.com/conan/degoodmanwilson/opensource"
 
 ## Upload
 
