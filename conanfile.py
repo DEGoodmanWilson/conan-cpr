@@ -62,4 +62,7 @@ class CprConan(ConanFile):
             self.copy(pattern="*.dylib", dst="lib", src="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ['cpr', 'pthread']
+        self.cpp_info.libs = ['cpr',]
+        if self.settings.os != "Windows":
+            self.cpp_info.cppflags = ["-pthread"]
+        
