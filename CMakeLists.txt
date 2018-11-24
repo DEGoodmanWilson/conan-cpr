@@ -1,4 +1,6 @@
 project(conan-cpr)
-include(conanbuildinfo.cmake)
-CONAN_BASIC_SETUP()
+
+include(${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
+conan_basic_setup()
+
 add_subdirectory(sources)

@@ -9,41 +9,45 @@ class CprConan(ConanFile):
     name = "cpr"
     version = "1.3.0"
     url = "https://github.com/DEGoodmanWilson/conan-cpr"
-    description = "Keep it short"
+    description = "C++ Requests: Curl for People, a spiritual port of Python Requests"
     license = "https://github.com/whoshuu/cpr/blob/1.3.0/LICENSE"
+    homepage = "http://whoshuu.github.io/cpr/"
+
     exports_sources = ["CMakeLists.txt", "LICENSE"]
     settings = "os", "arch", "compiler", "build_type"
     options = {"shared": [True, False],
                "use_ssl": [True, False]}
-    default_options = "shared=False", "libcurl:with_ldap=False", "use_ssl=True"
-    #use static org/channel for libs in conan-center
-    #use version ranges for dependencies unless there's a reason not to
-    requires = "libcurl/7.56.1@bincrafters/stable"
+    default_options = {"shared": False,
+                       "libcurl:with_ldap": False,
+                       "use_ssl": True}
     generators = "cmake"
 
     def requirements(self):
-        if self.options.use_ssl:
-            self.options["libcurl"].with_openssl = True
-        else:
-            self.options["libcurl"].with_openssl = False
+        self.requires("libcurl/7.56.1@bincrafters/stable")
 
-        if tools.os_info.is_macos:
-            if "libcurl" in self.requires:
-                del self.requires["libcurl"]
-
+    def configure(self):
+        self.options["libcurl"].with_openssl = bool(self.options.use_ssl)
 
     def source(self):
         source_url = "https://github.com/whoshuu/cpr"
         tools.get("{0}/archive/{1}.tar.gz".format(source_url, self.version))
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, "sources")
-        #Rename to "sources" is a convention to simplify later steps
 
-    def build(self):
+    def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["USE_SYSTEM_CURL"] = True # Force CPR to not try to build curl itself from a git submodule
         cmake.definitions["BUILD_CPR_TESTS"] = False
         cmake.configure()
+        return cmake
+
+    def build(self):
+        if self.settings.os == "Macos" and self.options.shared:
+            tools.replace_in_file(os.path.join('sources', 'cpr', 'CMakeLists.txt'),
+                                  """target_link_libraries(${CPR_LIBRARIES}""",
+                                  """target_link_libraries(${CPR_LIBRARIES} z""")
+
+        cmake = self._configure_cmake()
         cmake.build()
 
     def package(self):
@@ -57,6 +61,4 @@ class CprConan(ConanFile):
             self.copy(pattern="*.dylib", dst="lib", src="lib", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = tools.collect_libs(self)
-        if tools.os_info.is_macos:
-            self.cpp_info.libs.append("curl")
+        self.cpp_info.libs = ['cpr', ]
