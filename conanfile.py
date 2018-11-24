@@ -43,6 +43,7 @@ class CprConan(ConanFile):
 
     def build(self):
         if self.settings.os == "Macos" and self.options.shared:
+            # TODO: Is it a bug in libcurl package?
             tools.replace_in_file(os.path.join('sources', 'cpr', 'CMakeLists.txt'),
                                   """target_link_libraries(${CPR_LIBRARIES}""",
                                   """target_link_libraries(${CPR_LIBRARIES} z""")
