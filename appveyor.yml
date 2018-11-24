@@ -74,37 +74,46 @@ environment:
           CONAN_ARCHS: x86_64
           CONAN_BUILD_TYPES: Release
           CONAN_VISUAL_RUNTIMES: MD
+
         - MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 1
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "4.9@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 2
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "5@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 1
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "5@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 2
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "6@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 1
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "6@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 2
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 1
+          CONAN_TOTAL_PAGES: 2
 
         - MINGW_CONFIGURATIONS: "7@x86_64@seh@posix"
           CONAN_BASH_PATH: "c:\\msys64\\usr\\bin\\bash"
           CONAN_CURRENT_PAGE: 2
+          CONAN_TOTAL_PAGES: 2
 
 install:
   - set PATH=%PATH%;%PYTHON%/Scripts/
