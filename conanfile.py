@@ -75,6 +75,3 @@ class CprConan(ConanFile):
         self.cpp_info.libs = ['cpr',]
         if self.settings.os != "Windows":
             self.cpp_info.cppflags = ["-pthread"]
-        if self.settings.os == "Macos" and self.options.shared:
-            self.cpp_info.cppflags = ["-z"]
-        
