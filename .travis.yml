@@ -54,7 +54,11 @@ jobs:
         env: CONAN_CLANG_VERSIONS=6.0 CONAN_DOCKER_IMAGE=conanio/clang60
       - <<: *linux
         stage: conan-linux
-        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7
+        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7 CONAN_CURRENT_PAGE=1 CONAN_TOTAL_PAGES=2
+      - <<: *linux
+        stage: conan-linux
+        env: CONAN_CLANG_VERSIONS=7.0 CONAN_DOCKER_IMAGE=conanio/clang7 CONAN_CURRENT_PAGE=2 CONAN_TOTAL_PAGES=2
+
       - <<: *osx
         stage: conan-osx
         osx_image: xcode7.3
