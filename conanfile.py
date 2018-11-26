@@ -26,7 +26,8 @@ class CprConan(ConanFile):
 
     def requirements(self):
         self.requires("libcurl/7.56.1@bincrafters/stable")
-        self.requires("OpenSSL/[>=1.0,<1.1]@conan/stable")
+        if self.settings.os == "Windows" and self.settings.compiler.runtime == "MD":
+            self.requires("OpenSSL/[>=1.0,<1.1]@conan/stable")
 
     def configure(self):
         if self.settings.compiler == "Visual Studio":
@@ -43,6 +44,11 @@ class CprConan(ConanFile):
         extracted_dir = self.name + "-" + self.version
         os.rename(extracted_dir, "sources")
 
+        # Use Conan to find CURL
+        tools.replace_in_file(os.path.join('sources', 'opt', 'CMakeLists.txt'),
+                              """find_package(CURL)"""
+                              """set(CURL_FOUND ON)\nset(CURL_LIBRARIES ${CONAN_LIBS}\n""")
+
     def _configure_cmake(self):
         cmake = CMake(self)
         cmake.definitions["USE_SYSTEM_CURL"] = True # Force CPR to not try to build curl itself from a git submodule
@@ -51,12 +57,6 @@ class CprConan(ConanFile):
         return cmake
 
     def build(self):
-        if self.settings.os == "Macos" and self.options.shared:
-            # TODO: Is it a bug in libcurl package?
-            tools.replace_in_file(os.path.join('sources', 'cpr', 'CMakeLists.txt'),
-                                  """target_link_libraries(${CPR_LIBRARIES}""",
-                                  """target_link_libraries(${CPR_LIBRARIES} z""")
-
         cmake = self._configure_cmake()
         cmake.build()
 
@@ -74,4 +74,6 @@ class CprConan(ConanFile):
         self.cpp_info.libs = ['cpr',]
         if self.settings.os != "Windows":
             self.cpp_info.cppflags = ["-pthread"]
+        if self.settings.os == "Macos" and self.options.shared:
+            self.cpp_info.cppflags = ["-z"]
         
