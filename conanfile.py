@@ -26,9 +26,6 @@ class CprConan(ConanFile):
 
     def requirements(self):
         self.requires("libcurl/7.56.1@bincrafters/stable")
-        if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio" and \
-                self.settings.compiler.runtime == "MD":
-            self.requires("OpenSSL/[>=1.0,<1.1]@conan/stable")
 
     def configure(self):
         if self.settings.compiler == "Visual Studio":
@@ -54,6 +51,7 @@ class CprConan(ConanFile):
         cmake = CMake(self)
         cmake.definitions["USE_SYSTEM_CURL"] = True # Force CPR to not try to build curl itself from a git submodule
         cmake.definitions["BUILD_CPR_TESTS"] = False
+        cmake.definitions["CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS"] = bool(self.options.shared)
         cmake.configure()
         return cmake
 
