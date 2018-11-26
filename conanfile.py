@@ -46,8 +46,8 @@ class CprConan(ConanFile):
 
         # Use Conan to find CURL
         tools.replace_in_file(os.path.join('sources', 'opt', 'CMakeLists.txt'),
-                              """find_package(CURL)"""
-                              """set(CURL_FOUND ON)\nset(CURL_LIBRARIES ${CONAN_LIBS}\n""")
+                              """find_package(CURL)""",
+                              """set(CURL_FOUND ON)\nset(CURL_LIBRARIES ${CONAN_LIBS}""")
 
     def _configure_cmake(self):
         cmake = CMake(self)
