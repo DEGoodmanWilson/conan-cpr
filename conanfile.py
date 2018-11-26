@@ -26,6 +26,7 @@ class CprConan(ConanFile):
 
     def requirements(self):
         self.requires("libcurl/7.56.1@bincrafters/stable")
+        self.requires("OpenSSL/[>=1.0,<1.1]@conan/stable")
 
     def configure(self):
         if self.settings.compiler == "Visual Studio":
