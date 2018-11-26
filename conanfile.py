@@ -26,7 +26,8 @@ class CprConan(ConanFile):
 
     def requirements(self):
         self.requires("libcurl/7.56.1@bincrafters/stable")
-        if self.settings.os == "Windows" and self.settings.compiler.runtime == "MD":
+        if self.settings.os == "Windows" and self.settings.compiler == "Visual Studio" and \
+                self.settings.compiler.runtime == "MD":
             self.requires("OpenSSL/[>=1.0,<1.1]@conan/stable")
 
     def configure(self):
