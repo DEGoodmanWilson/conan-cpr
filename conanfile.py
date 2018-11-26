@@ -3,7 +3,7 @@
 
 from conans import ConanFile, CMake, tools
 from conans.errors import ConanInvalidConfiguration
-from conans.models.version import Version
+from conans.model.version import Version
 import os
 
 
